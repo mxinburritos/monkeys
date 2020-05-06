@@ -1,17 +1,59 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { MuiThemeProvider, ThemeProvider, createMuiTheme, CssBaseline } from '@material-ui/core';
+import purple from '@material-ui/core/colors/purple'
+
+const colorTheme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#000',
+      main: '#000',
+      dark: '#000',
+      contrastText: '#000'
+    },
+    secondary: {
+      light: '#000',
+      main: '#000',
+      dark: '#000',
+      contrastText: '#000',
+    },
+    error: {
+      main: '#ff6666',
+      light: '#000',
+      dark: '#000',
+      contrastText: '#000',
+    },
+    divider: '#000',
+    action: {
+      active: '#000',
+      hover: '#000',
+      selected: '#000',
+      disabled: '#000',
+      disabledBackground: '#000',
+    },
+    text: {
+      primary: '#fff',
+      secondary: '#000',
+      disabled: '#000',
+      hint: '#000',
+      icon: '#000',
+    },
+    common: {
+      black: '#000',
+      white: '#fff',
+    },
+    background: {
+      default: '#121212',
+      paper: '#303030',
+    },
+  },
+});
 
 ReactDOM.render(
-  <React.StrictMode>
+  <ThemeProvider theme={colorTheme}>
+    <CssBaseline />
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </ThemeProvider>, document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
