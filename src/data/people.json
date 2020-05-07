@@ -2,22 +2,25 @@
   "people": [
     {
       "id": 0,
-      "name": "Person 1",
+      "name": "person 1",
       "swear_words": "952",
+      "n_word_count": "10",
       "activity_index": "0.14",
       "description": "Actual Clown"
     },
     {
       "id": 1,
-      "name": "Person 2",
+      "name": "person 2",
       "swear_words": "1494",
+      "n_word_count": "9",
       "activity_index": "0.52",
       "description": "Gaping Ape"
     },
     {
       "id": 2,
-      "name": "Person 3",
+      "name": "person 3",
       "swear_words": "9743",
+      "n_word_count": "5",
       "activity_index": "0.24",
       "description": "Bonobo"
     },
@@ -25,6 +28,7 @@
       "id": 3,
       "name": "person 4",
       "swear_words": "632",
+      "n_word_count": "103",
       "activity_index": "0.82",
       "description": "ooga booga"
     },
@@ -32,6 +36,7 @@
       "id": 4,
       "name": "person 5",
       "swear_words": "4213",
+      "n_word_count": "1",
       "activity_index": "0.72",
       "description": "circus"
     },
@@ -39,6 +44,7 @@
       "id": 5,
       "name": "person 6",
       "swear_words": "1423",
+      "n_word_count": "25",
       "activity_index": "0.47",
       "description": "monkey"
     }

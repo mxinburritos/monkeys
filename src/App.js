@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 
-import { Cards, Chart, Upload, TitleCard } from './components';
+import { Cards, Chart, Upload, TitleCard, EnhancedTable, Dropdown } from './components';
 import styles from './App.module.css';
-import PeopleData from './data/people.json'
+import PeopleData from './data/people.json';
 class App extends Component {
 
   state = {
@@ -14,7 +14,8 @@ class App extends Component {
     return (
       <div className={styles.container}>
         <TitleCard />
-        <Cards people={this.state.People} />
+        <EnhancedTable />
+        {/* <Dropdown /> */}
         <Chart />
       </div>
     );
