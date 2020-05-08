@@ -4,65 +4,34 @@ This project was built to read JSON data from Facebook Messenger group chats to 
 
 ## DISCLAIMER
 
-Data found on this app is not an accurate represent of any chat records as JSON files can easily be manipulated.
+Data found on this app is not an accurate represent of any chat records as the JSON files can easily be manipulated.
 
 ## Getting Started
 
 Visit https://mxinburritos.github.io/monkeys/ to use the application. Currently, the uploading feature is not implemented right now. Only the data from our group chat is actually shown.
 
-Table
+Table lists all users detected in the JSON file and provide information like message count and other metrics in each respective row.
 
-### `yarn test`
+Each user will display several graphs which helps to visualize data.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Setup
 
-### `yarn build`
+After cloning, run `npm i && npm start`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Built With 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* [ReactJS](https://reactjs.org/) - JavaScript Library used
+* [react-chartjs-2](https://jerairrest.github.io/react-chartjs-2/) - React wrapper for chartjs
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## License
 
-### `yarn eject`
+This project is licensed under the MIT License - see the 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## TODO
+- [ ] Make JSON processing helper methods
+- [ ] Display graphs of data
+- [ ] Change table headers
+- [ ] Add way to upload JSON files
+- [ ] Create JSON processing API
+- [ ] OPTIONAL: Add user login
+- [ ] OPTIONAL: Process other platforms
