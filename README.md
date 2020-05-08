@@ -1,16 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Monkeys 
 
-## Available Scripts
+This project was built to read JSON data from Facebook Messenger group chats to analyze important information. The main features include swear word counter, number of messages, and charts to visualize data.
 
-In the project directory, you can run:
+## DISCLAIMER
 
-### `yarn start`
+Data found on this app is not an accurate represent of any chat records as JSON files can easily be manipulated.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Visit https://mxinburritos.github.io/monkeys/ to use the application. Currently, the uploading feature is not implemented right now. Only the data from our group chat is actually shown.
+
+Table
 
 ### `yarn test`
 
