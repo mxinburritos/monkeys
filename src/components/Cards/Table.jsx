@@ -204,7 +204,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable() {
+export default function EnhancedTable(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('swear_word_count');
@@ -212,8 +212,7 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [people, setPeopleData] = React.useState(peopleData.people);
-  console.log(people);
+  const [people, setPeopleData] = React.useState(props.users);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';

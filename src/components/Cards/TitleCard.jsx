@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardTitle, CardContent, Typography } from '@material-ui/core';
-import styles from './TitleCard.module.css'
+import styles from './Cards.module.css'
 
 const TitleCard = () => {
   return (
