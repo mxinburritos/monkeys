@@ -9,6 +9,8 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
+import { messageCounter, badWordCounter } from '../../helpers/JSONProcessing';
+
 import styles from './Table.module.css';
 import peopleData from '../../data/people.json';
 
