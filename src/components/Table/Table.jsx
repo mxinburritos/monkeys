@@ -3,8 +3,25 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import {
-  Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel,
-  Toolbar, Typography, Paper, Checkbox, IconButton, Tooltip, FormControlLabel, Switch, makeStyles, lighten
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TableSortLabel,
+  Toolbar,
+  Typography,
+  Paper,
+  Checkbox,
+  IconButton,
+  Tooltip,
+  FormControlLabel,
+  Switch,
+  makeStyles,
+  lighten,
+  Box,
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
@@ -62,14 +79,42 @@ function stableSort(array, comparator) {
 
 const headCells = [
   { id: 'name', numeric: false, disablePadding: true, label: 'User' },
-  { id: 'description', numeric: false, disablePadding: false, label: 'Nickname' },
-  { id: 'swear_words_count', numeric: true, disablePadding: false, label: 'Swear Word Count' },
-  { id: 'n_word_count', numeric: true, disablePadding: false, label: 'N Word Count' },
-  { id: 'activity_index', numeric: true, disablePadding: false, label: 'Activity Index' },
+  {
+    id: 'description',
+    numeric: false,
+    disablePadding: false,
+    label: 'Nickname',
+  },
+  {
+    id: 'swear_words_count',
+    numeric: true,
+    disablePadding: false,
+    label: 'Swear Word Count',
+  },
+  {
+    id: 'n_word_count',
+    numeric: true,
+    disablePadding: false,
+    label: 'N Word Count',
+  },
+  {
+    id: 'activity_index',
+    numeric: true,
+    disablePadding: false,
+    label: 'Activity Index',
+  },
 ];
 
 function EnhancedTableHead(props) {
-  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+  const {
+    classes,
+    onSelectAllClick,
+    order,
+    orderBy,
+    numSelected,
+    rowCount,
+    onRequestSort,
+  } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -129,13 +174,13 @@ const useToolbarStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === 'light'
       ? {
-        color: theme.palette.secondary.main,
-        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-      }
+          color: theme.palette.secondary.main,
+          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+        }
       : {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.secondary.dark,
-      },
+          color: theme.palette.text.primary,
+          backgroundColor: theme.palette.secondary.dark,
+        },
   title: {
     flex: '1 1 100%',
   },
@@ -152,14 +197,24 @@ const EnhancedTableToolbar = (props) => {
       })}
     >
       {numSelected > 0 ? (
-        <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
+        <Typography
+          className={classes.title}
+          color="inherit"
+          variant="subtitle1"
+          component="div"
+        >
           {numSelected} selected
         </Typography>
       ) : (
-          <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-            Group Members
-          </Typography>
-        )}
+        <Typography
+          className={classes.title}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        >
+          Group Members
+        </Typography>
+      )}
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
@@ -168,12 +223,12 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="filter list">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
-        )}
+        <Tooltip title="Filter list">
+          <IconButton aria-label="filter list">
+            <FilterListIcon />
+          </IconButton>
+        </Tooltip>
+      )}
     </Toolbar>
   );
 };
@@ -244,7 +299,7 @@ export default function EnhancedTable(props) {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+        selected.slice(selectedIndex + 1)
       );
     }
 
@@ -266,10 +321,11 @@ export default function EnhancedTable(props) {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, people.length - page * rowsPerPage);
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, people.length - page * rowsPerPage);
 
   return (
-    <div className={classes.root}>
+    <Box m={1}>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -311,7 +367,12 @@ export default function EnhancedTable(props) {
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                      >
                         {row.name}
                       </TableCell>
                       <TableCell align="left">{row.description}</TableCell>
@@ -343,6 +404,6 @@ export default function EnhancedTable(props) {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
-    </div>
+    </Box>
   );
 }
