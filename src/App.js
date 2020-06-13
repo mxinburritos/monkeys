@@ -11,7 +11,7 @@ import {
 } from './components';
 import styles from './App.module.css';
 import PeopleData from './data/people.json';
-import MessagesShort from './data/message_16.json';
+import messageData from './data/message_16.json';
 import swears from './data/swears.json';
 
 class App extends Component {
@@ -19,7 +19,7 @@ class App extends Component {
     super(props);
     this.state = {
       People: PeopleData.people,
-      MessagesShort,
+      messageData,
       ChartDisplay: 'Message Frequency',
     };
 
@@ -31,14 +31,14 @@ class App extends Component {
   }
 
   render() {
-    const { People, MessagesShort, ChartDisplay } = this.state;
+    const { People, messageData, ChartDisplay } = this.state;
     return (
       <div className={styles.container}>
         <TitleCard />
         <DataDropdown />
-        <EnhancedTable users={People} swears={swears} />
+        <EnhancedTable users={messageData} swears={swears} />
         <Dropdown changeChart={this.changeChart} />
-        <Chart users={MessagesShort} chart={ChartDisplay} swears={swears} />
+        <Chart users={messageData} chart={ChartDisplay} swears={swears} />
       </div>
     );
   }

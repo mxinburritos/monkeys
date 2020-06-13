@@ -31,6 +31,11 @@ function createData(name, swear_word_count, fat, carbs, protein) {
   return { name, swear_word_count, fat, carbs, protein };
 }
 
+function generateNameLabels(data) {
+  const participants = data.participants.map(person => person.name);
+  return participants;
+}
+
 const rows = [
   createData('Cupcake', 305, 3.7, 67, 4.3),
   createData('Donut', 452, 25.0, 51, 4.9),
@@ -170,12 +175,12 @@ const useToolbarStyles = makeStyles(theme => ({
   highlight:
     theme.palette.type === 'light'
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+          color: theme.palette.primary.main,
+          backgroundColor: lighten(theme.palette.primary.light, 0.85),
         }
       : {
           color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
+          backgroundColor: theme.palette.primary.dark,
         },
   title: {
     flex: '1 1 100%',
@@ -243,6 +248,48 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const countMessages = (data, user) => {
+  let count = 0;
+  data.messages.forEach(message => {
+    if (message.sender_name === user) {
+      count += 1;
+    }
+  });
+  return count;
+};
+
+const countNWord = (data, user, swears) => {
+  let count = 0;
+  data.messages.forEach(message => {
+    if (message.sender_name === user) {
+      if ('content' in message) {
+        message.content.split(' ').forEach(word => {
+          if (word.toLowerCase() in swears.NWords) {
+            count += 1;
+          }
+        });
+      }
+    }
+  });
+  return count;
+};
+
+const countSwearWord = (data, user, swears) => {
+  let count = 0;
+  data.messages.forEach(message => {
+    if (message.sender_name === user) {
+      if ('content' in message) {
+        message.content.split(' ').forEach(word => {
+          if (word.toLowerCase() in swears.swear_words) {
+            count += 1;
+          }
+        });
+      }
+    }
+  });
+  return count;
+};
+
 export default function EnhancedTable(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
@@ -251,7 +298,7 @@ export default function EnhancedTable(props) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [people, setPeopleData] = React.useState(props.users);
+  const [userData, setUserData] = React.useState(props.users);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -261,7 +308,7 @@ export default function EnhancedTable(props) {
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
-      const newSelecteds = people.map(n => n.name);
+      const newSelecteds = userData.participants.array.map(n => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -304,7 +351,8 @@ export default function EnhancedTable(props) {
   const isSelected = name => selected.indexOf(name) !== -1;
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, people.length - page * rowsPerPage);
+    rowsPerPage -
+    Math.min(rowsPerPage, userData.participants.length - page * rowsPerPage);
 
   return (
     <Box m={1}>
@@ -324,14 +372,25 @@ export default function EnhancedTable(props) {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={people.length}
+              rowCount={userData.participants.length}
             />
             <TableBody>
-              {stableSort(people, getComparator(order, orderBy))
+              {stableSort(userData.participants, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
+                  const messageCount = countMessages(userData, row.name);
+                  const nWordCount = countNWord(
+                    userData,
+                    row.name,
+                    props.swears
+                  );
+                  const swearWordCount = countSwearWord(
+                    userData,
+                    row.name,
+                    props.swears
+                  );
 
                   return (
                     <TableRow
@@ -357,10 +416,15 @@ export default function EnhancedTable(props) {
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align='left'>{row.description}</TableCell>
-                      <TableCell align='right'>{row.swear_words}</TableCell>
-                      <TableCell align='right'>{row.n_word_count}</TableCell>
-                      <TableCell align='right'>{row.activity_index}</TableCell>
+                      <TableCell align='left'>
+                        {Number(
+                          Math.round(swearWordCount / messageCount + 'e3') +
+                            'e-3'
+                        ) * 10}
+                      </TableCell>
+                      <TableCell align='right'>{messageCount}</TableCell>
+                      <TableCell align='right'>{nWordCount}</TableCell>
+                      <TableCell align='right'>{swearWordCount}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -375,7 +439,7 @@ export default function EnhancedTable(props) {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component='div'
-          count={people.length}
+          count={userData.participants.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
