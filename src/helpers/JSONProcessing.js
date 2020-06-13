@@ -3,10 +3,10 @@ const BAD_WORDS = /\b(4r5e|5h1t|5hit|a55|anal|anus|ar5e|arrse|arse|ass|ass-fucke
 function messageCounter(data) {
   let response = JSON.parse(data);
   let messageCount = {};
-  response.participants.forEach((user) => {
+  response.participants.forEach(user => {
     messageCount[user.name] = 0;
   });
-  response.messages.forEach((message) => {
+  response.messages.forEach(message => {
     messageCount[message.sender_name]++;
   });
 }
@@ -14,10 +14,10 @@ function messageCounter(data) {
 function badWordCounter(data) {
   let response = JSON.parse(data);
   let badWordCount = {};
-  response.participants.forEach((user) => {
+  response.participants.forEach(user => {
     badWordCount[user.name] = 0;
   });
-  response.messages.forEach((message) => {
+  response.messages.forEach(message => {
     if (BAD_WORDS.test(message)) {
       badWordCount[message.sender_name]++;
     }

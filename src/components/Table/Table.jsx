@@ -23,10 +23,6 @@ import {
   lighten,
   Box,
 } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-
-import { messageCounter, badWordCounter } from '../../helpers/JSONProcessing';
 
 import styles from './Table.module.css';
 import peopleData from '../../data/people.json';
@@ -74,7 +70,7 @@ function stableSort(array, comparator) {
     if (order !== 0) return order;
     return a[1] - b[1];
   });
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis.map(el => el[0]);
 }
 
 const headCells = [
@@ -83,13 +79,13 @@ const headCells = [
     id: 'description',
     numeric: false,
     disablePadding: false,
-    label: 'Nickname',
+    label: 'Vulgarity Index',
   },
   {
-    id: 'swear_words_count',
+    id: 'message_count',
     numeric: true,
     disablePadding: false,
-    label: 'Swear Word Count',
+    label: 'Message Count',
   },
   {
     id: 'n_word_count',
@@ -101,7 +97,7 @@ const headCells = [
     id: 'activity_index',
     numeric: true,
     disablePadding: false,
-    label: 'Activity Index',
+    label: 'Swear Word Count',
   },
 ];
 
@@ -115,14 +111,14 @@ function EnhancedTableHead(props) {
     rowCount,
     onRequestSort,
   } = props;
-  const createSortHandler = (property) => (event) => {
+  const createSortHandler = property => event => {
     onRequestSort(event, property);
   };
 
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
+        <TableCell padding='checkbox'>
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
@@ -130,7 +126,7 @@ function EnhancedTableHead(props) {
             inputProps={{ 'aria-label': 'select all users' }}
           />
         </TableCell>
-        {headCells.map((headCell) => (
+        {headCells.map(headCell => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
@@ -166,7 +162,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const useToolbarStyles = makeStyles((theme) => ({
+const useToolbarStyles = makeStyles(theme => ({
   root: {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
@@ -186,7 +182,7 @@ const useToolbarStyles = makeStyles((theme) => ({
   },
 }));
 
-const EnhancedTableToolbar = (props) => {
+const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
@@ -199,35 +195,21 @@ const EnhancedTableToolbar = (props) => {
       {numSelected > 0 ? (
         <Typography
           className={classes.title}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
+          color='inherit'
+          variant='subtitle1'
+          component='div'
         >
           {numSelected} selected
         </Typography>
       ) : (
         <Typography
           className={classes.title}
-          variant="h6"
-          id="tableTitle"
-          component="div"
+          variant='h6'
+          id='tableTitle'
+          component='div'
         >
           Group Members
         </Typography>
-      )}
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
       )}
     </Toolbar>
   );
@@ -237,7 +219,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
@@ -277,9 +259,9 @@ export default function EnhancedTable(props) {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = (event) => {
+  const handleSelectAllClick = event => {
     if (event.target.checked) {
-      const newSelecteds = people.map((n) => n.name);
+      const newSelecteds = people.map(n => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -310,16 +292,16 @@ export default function EnhancedTable(props) {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = event => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
-  const handleChangeDense = (event) => {
+  const handleChangeDense = event => {
     setDense(event.target.checked);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = name => selected.indexOf(name) !== -1;
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, people.length - page * rowsPerPage);
@@ -331,9 +313,9 @@ export default function EnhancedTable(props) {
         <TableContainer>
           <Table
             className={classes.table}
-            aria-labelledby="tableTitle"
+            aria-labelledby='tableTitle'
             size={dense ? 'small' : 'medium'}
-            aria-label="enhanced table"
+            aria-label='enhanced table'
           >
             <EnhancedTableHead
               classes={classes}
@@ -354,31 +336,31 @@ export default function EnhancedTable(props) {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
-                      role="checkbox"
+                      onClick={event => handleClick(event, row.name)}
+                      role='checkbox'
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={row.name}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <TableCell padding='checkbox'>
                         <Checkbox
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
                       </TableCell>
                       <TableCell
-                        component="th"
+                        component='th'
                         id={labelId}
-                        scope="row"
-                        padding="none"
+                        scope='row'
+                        padding='none'
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align="left">{row.description}</TableCell>
-                      <TableCell align="right">{row.swear_words}</TableCell>
-                      <TableCell align="right">{row.n_word_count}</TableCell>
-                      <TableCell align="right">{row.activity_index}</TableCell>
+                      <TableCell align='left'>{row.description}</TableCell>
+                      <TableCell align='right'>{row.swear_words}</TableCell>
+                      <TableCell align='right'>{row.n_word_count}</TableCell>
+                      <TableCell align='right'>{row.activity_index}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -392,7 +374,7 @@ export default function EnhancedTable(props) {
         </TableContainer>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
-          component="div"
+          component='div'
           count={people.length}
           rowsPerPage={rowsPerPage}
           page={page}
@@ -402,7 +384,7 @@ export default function EnhancedTable(props) {
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
+        label='Dense padding'
       />
     </Box>
   );
