@@ -1,4 +1,4 @@
-# Monkeys 
+# Monkeys
 
 This project was built to read JSON data from Facebook Messenger group chats to analyze important information. The main features include swear word counter, number of messages, and charts to visualize data.
 
@@ -18,19 +18,19 @@ Each user will display several graphs which helps to visualize data.
 
 After cloning, run `npm i && npm start`
 
-## Built With 
+## Built With
 
-* [ReactJS](https://reactjs.org/) - JavaScript Library used
-* [react-chartjs-2](https://jerairrest.github.io/react-chartjs-2/) - React wrapper for chartjs
+- [ReactJS](https://reactjs.org/) - JavaScript Library used
+- [react-chartjs-2](https://jerairrest.github.io/react-chartjs-2/) - React wrapper for chartjs
 
 ## License
 
-This project is licensed under the MIT License - see the 
+This project is licensed under the MIT License - see the
 
 ## TODO
-- [ ] Make JSON processing helper methods
-- [ ] Display graphs of data
-- [ ] Change table headers
+
+- [x] Display graphs of data
+- [x] Change table headers
 - [ ] Add way to upload JSON files
 - [ ] Create JSON processing API
 - [ ] OPTIONAL: Add user login
