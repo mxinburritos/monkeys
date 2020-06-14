@@ -7,6 +7,86 @@ const generateNameLabels = data => {
   return participants;
 };
 
+Date.prototype.addDays = function (days) {
+  let date = new Date(this.valueOf());
+  date.setDate(date.getDate() + days);
+  return date;
+};
+
+Date.prototype.toShortFormat = function () {
+  let monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+
+  let day = this.getDate();
+
+  let monthIndex = this.getMonth();
+  let monthName = monthNames[monthIndex];
+
+  let year = this.getFullYear();
+
+  return `${monthName} ${day}, ${year}`;
+};
+
+const diff_months = (dt1, dt2) => {
+  let diff = (dt2.getTime() - dt1.getTime()) / 1000;
+  diff /= 60 * 60 * 24 * 7 * 4;
+  return Math.abs(Math.round(diff));
+};
+
+const generateDateRange = data => {
+  let dt1 = new Date(data.messages[data.messages.length - 1].timestamp_ms);
+  let dt2 = new Date(data.messages[0].timestamp_ms);
+  let dates = [];
+  let newdt = dt1;
+  let monthDiff = diff_months(dt1, dt2);
+  if (monthDiff <= 2) {
+    const diffDays = Math.ceil((dt2 - dt1) / (1000 * 60 * 60 * 24));
+    for (let i = 0; i < diffDays; i += diffDays / 10) {
+      newdt = newdt.addDays(diffDays / 10);
+      dates.push(newdt);
+    }
+  }
+  return dates;
+};
+
+const generateDateLabels = data => {
+  return generateDateRange(data).map(datum => datum.toShortFormat());
+};
+
+const renderFrequencyData = (data, user) => {
+  const count = {};
+  const countArr = [];
+  const dates = generateDateRange(data).map(date => date.getTime());
+  dates.forEach(date => {
+    count[date] = 0;
+  });
+  data.messages.forEach(message => {
+    if (message.sender_name === user) {
+      let currDate = message.timestamp_ms;
+      let closest = dates.reduce(function (prev, curr) {
+        return Math.abs(curr - currDate) < Math.abs(prev - currDate)
+          ? curr
+          : prev;
+      });
+      count[closest] += 1;
+    }
+  });
+  Object.entries(count).forEach(([key, value]) => countArr.push(value));
+  return countArr;
+};
+
 const renderData = (data, type, swears) => {
   if (type === 'N-Word Count') {
     return countNWord(data, swears);
@@ -70,17 +150,45 @@ const countSwearWord = (data, swears) => {
 
 const lineChart = userData => {
   const data = {
-    labels: generateNameLabels(userData),
+    labels: generateDateLabels(userData),
+    datasets: userData.participants.map(participant => {
+      return {
+        label: participant.name,
+        fill: 'false',
+        backgroundColor: 'rgba(255,99,132,0.4)',
+        borderColor: 'rgba(255,99,132,1)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(255,99,132,0.8)',
+        hoverBorderColor: 'rgba(255,99,132,1)',
+        data: renderFrequencyData(userData, participant.name),
+      };
+    }),
+  };
+  return (
+    <Line
+      data={data}
+      options={{
+        maintainAspectRatio: true,
+        responsive: true,
+        legend: { display: false },
+      }}
+    />
+  );
+};
+
+const copyLineChart = userData => {
+  const data = {
+    labels: generateDateLabels(userData),
     datasets: [
       {
         label: 'Number of Messages',
         fill: 'false',
-        backgroundColor: 'rgba(255,99,132,0.2)',
+        backgroundColor: 'rgba(255,99,132,0.4)',
         borderColor: 'rgba(255,99,132,1)',
         borderWidth: 1,
-        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+        hoverBackgroundColor: 'rgba(255,99,132,0.8)',
         hoverBorderColor: 'rgba(255,99,132,1)',
-        data: countMessages(userData),
+        data: renderFrequencyData(userData, 'Marie Curie'),
       },
     ],
   };
@@ -93,10 +201,10 @@ const barChart = (userData, type, swears) => {
     datasets: [
       {
         label: 'Number of Messages',
-        backgroundColor: 'rgba(255,99,132,0.2)',
+        backgroundColor: 'rgba(255,99,132,0.4)',
         borderColor: 'rgba(255,99,132,1)',
         borderWidth: 1,
-        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+        hoverBackgroundColor: 'rgba(255,99,132,0.8)',
         hoverBorderColor: 'rgba(255,99,132,1)',
         data: renderData(userData, type, swears),
       },

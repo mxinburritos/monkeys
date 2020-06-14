@@ -25,7 +25,6 @@ import {
 } from '@material-ui/core';
 
 import styles from './Table.module.css';
-import peopleData from '../../data/people.json';
 
 function createData(name, swear_word_count, fat, carbs, protein) {
   return { name, swear_word_count, fat, carbs, protein };
