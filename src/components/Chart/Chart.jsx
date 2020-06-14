@@ -149,52 +149,54 @@ const countSwearWord = (data, swears) => {
 };
 
 const lineChart = userData => {
+  const numOfParticipants = userData.participants.length;
   const data = {
     labels: generateDateLabels(userData),
-    datasets: userData.participants.map(participant => {
+    datasets: userData.participants.map((participant, index) => {
       return {
         label: participant.name,
         fill: 'false',
-        backgroundColor: 'rgba(255,99,132,0.4)',
-        borderColor: 'rgba(255,99,132,1)',
+        backgroundColor: `rgba(${
+          255 - index * (255 / numOfParticipants)
+        },99,132,0.4)`,
+        borderColor: `rgba(${
+          255 - index * (255 / numOfParticipants)
+        },99,132,1)`,
         borderWidth: 1,
-        hoverBackgroundColor: 'rgba(255,99,132,0.8)',
-        hoverBorderColor: 'rgba(255,99,132,1)',
+        hoverBackgroundColor: `rgba(${
+          255 - index * (255 / numOfParticipants)
+        },99,132,0.8)`,
+        hoverBorderColor: `rgba(${
+          255 - index * (255 / numOfParticipants)
+        },99,132,1)`,
         data: renderFrequencyData(userData, participant.name),
       };
     }),
   };
-  return (
-    <Line
-      data={data}
-      height={400}
-      width={600}
-      options={{
-        responsive: true,
-        maintainAspectRatio: true,
-        legend: { display: false },
-      }}
-    />
-  );
-};
 
-const copyLineChart = userData => {
-  const data = {
-    labels: generateDateLabels(userData),
-    datasets: [
-      {
-        label: 'Number of Messages',
-        fill: 'false',
-        backgroundColor: 'rgba(255,99,132,0.4)',
-        borderColor: 'rgba(255,99,132,1)',
-        borderWidth: 1,
-        hoverBackgroundColor: 'rgba(255,99,132,0.8)',
-        hoverBorderColor: 'rgba(255,99,132,1)',
-        data: renderFrequencyData(userData, 'Marie Curie'),
-      },
-    ],
+  const options = {
+    responsive: true,
+    maintainAspectRatio: true,
+    legend: { display: true },
+    scales: {
+      xAxes: [
+        {
+          gridLines: {
+            color: 'rgba(255,255,255,0.5)',
+          },
+        },
+      ],
+      yAxes: [
+        {
+          gridLines: {
+            color: 'rgba(255,255,255,0.5)',
+          },
+        },
+      ],
+    },
   };
-  return <Line data={data} options={{ maintainAspectRatio: false }} />;
+
+  return <Line data={data} height={400} width={600} options={options} />;
 };
 
 const barChart = (userData, type, swears) => {
