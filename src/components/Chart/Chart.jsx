@@ -167,9 +167,11 @@ const lineChart = userData => {
   return (
     <Line
       data={data}
+      height={400}
+      width={600}
       options={{
-        maintainAspectRatio: true,
         responsive: true,
+        maintainAspectRatio: true,
         legend: { display: false },
       }}
     />
@@ -210,7 +212,14 @@ const barChart = (userData, type, swears) => {
       },
     ],
   };
-  return <Bar data={data} options={{ maintainAspectRatio: false }} />;
+  return (
+    <Bar
+      data={data}
+      height={400}
+      width={600}
+      options={{ maintainAspectRatio: false }}
+    />
+  );
 };
 
 const Chart = props => {
