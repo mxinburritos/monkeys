@@ -31,6 +31,7 @@ This project is licensed under the MIT License - see the
 
 - [x] Display graphs of data
 - [x] Change table headers
+- [x] Added Frequency Graph
 - [ ] Add way to upload JSON files
 - [ ] Create JSON processing API
 - [ ] OPTIONAL: Add user login
