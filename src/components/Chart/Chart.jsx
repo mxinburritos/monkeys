@@ -182,14 +182,14 @@ const lineChart = userData => {
       xAxes: [
         {
           gridLines: {
-            color: 'rgba(255,255,255,0.5)',
+            color: 'rgba(166,166,166,0.5)',
           },
         },
       ],
       yAxes: [
         {
           gridLines: {
-            color: 'rgba(255,255,255,0.5)',
+            color: 'rgba(166,166,166,0.5)',
           },
         },
       ],
@@ -200,6 +200,26 @@ const lineChart = userData => {
 };
 
 const barChart = (userData, type, swears) => {
+  const options = {
+    responsive: true,
+    maintainAspectRatio: true,
+    scales: {
+      xAxes: [
+        {
+          gridLines: {
+            color: 'rgba(166,166,166,0.5)',
+          },
+        },
+      ],
+      yAxes: [
+        {
+          gridLines: {
+            color: 'rgba(166,166,166,0.5)',
+          },
+        },
+      ],
+    },
+  };
   const data = {
     labels: generateNameLabels(userData),
     datasets: [
@@ -214,14 +234,7 @@ const barChart = (userData, type, swears) => {
       },
     ],
   };
-  return (
-    <Bar
-      data={data}
-      height={400}
-      width={600}
-      options={{ maintainAspectRatio: false }}
-    />
-  );
+  return <Bar data={data} height={400} width={600} options={options} />;
 };
 
 const Chart = props => {

@@ -51,8 +51,8 @@ function stableSort(array, comparator) {
 const headCells = [
   { id: 'name', numeric: false, disablePadding: true, label: 'User' },
   {
-    id: 'description',
-    numeric: false,
+    id: 'vulgarity',
+    numeric: true,
     disablePadding: false,
     label: 'Vulgarity Index',
   },
@@ -386,11 +386,12 @@ export default function EnhancedTable(props) {
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align='left'>
+                      <TableCell align='right'>
                         {Number(
-                          Math.round(swearWordCount / messageCount + 'e3') +
-                            'e-3'
-                        ) * 10}
+                          Math.round(
+                            (swearWordCount / messageCount) * 10 + 'e3'
+                          ) + 'e-3'
+                        )}
                       </TableCell>
                       <TableCell align='right'>{messageCount}</TableCell>
                       <TableCell align='right'>{nWordCount}</TableCell>

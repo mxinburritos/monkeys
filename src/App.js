@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 
 import {
   Chart,
-  Upload,
   TitleCard,
   EnhancedTable,
   Dropdown,
-  DataDropdown,
+  Upload,
 } from './components';
 import styles from './App.module.css';
 import messageData from './data/message_sample.json';
@@ -33,7 +33,7 @@ class App extends Component {
     return (
       <div className={styles.container}>
         <TitleCard />
-        <DataDropdown />
+        <Upload />
         <EnhancedTable users={messageData} swears={swears} />
         <Dropdown changeChart={this.changeChart} />
         <Chart users={messageData} chart={ChartDisplay} swears={swears} />
