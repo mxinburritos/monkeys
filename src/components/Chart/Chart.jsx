@@ -156,19 +156,19 @@ const lineChart = userData => {
       return {
         label: participant.name,
         fill: 'false',
-        backgroundColor: `rgba(${
-          255 - index * (255 / numOfParticipants)
-        },99,132,0.4)`,
-        borderColor: `rgba(${
-          255 - index * (255 / numOfParticipants)
-        },99,132,1)`,
+        backgroundColor: `rgba(${90 - index * (90 / numOfParticipants)},${
+          150 - index * (150 / numOfParticipants)
+        },${243 - index * (243 / numOfParticipants)},0.8)`,
+        borderColor: `rgba(${90 - index * (90 / numOfParticipants)},${
+          150 - index * (150 / numOfParticipants)
+        },${243 - index * (243 / numOfParticipants)},1)`,
         borderWidth: 1,
-        hoverBackgroundColor: `rgba(${
-          255 - index * (255 / numOfParticipants)
-        },99,132,0.8)`,
-        hoverBorderColor: `rgba(${
-          255 - index * (255 / numOfParticipants)
-        },99,132,1)`,
+        hoverBackgroundColor: `rgba(${90 - index * (90 / numOfParticipants)},${
+          150 - index * (150 / numOfParticipants)
+        },${243 - index * (243 / numOfParticipants)},1)`,
+        hoverBorderColor: `rgba(${90 - index * (90 / numOfParticipants)},${
+          150 - index * (150 / numOfParticipants)
+        },${243 - index * (243 / numOfParticipants)},1)`,
         data: renderFrequencyData(userData, participant.name),
       };
     }),
@@ -225,11 +225,11 @@ const barChart = (userData, type, swears) => {
     datasets: [
       {
         label: 'Number of Messages',
-        backgroundColor: 'rgba(255,99,132,0.4)',
-        borderColor: 'rgba(255,99,132,1)',
+        backgroundColor: 'rgba(30,150,243,0.8)',
+        borderColor: 'rgba(30,150,243,1)',
         borderWidth: 1,
-        hoverBackgroundColor: 'rgba(255,99,132,0.8)',
-        hoverBorderColor: 'rgba(255,99,132,1)',
+        hoverBackgroundColor: 'rgba(30,150,243,1)',
+        hoverBorderColor: 'rgba(30,150,243,1)',
         data: renderData(userData, type, swears),
       },
     ],
