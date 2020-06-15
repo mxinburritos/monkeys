@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Upload = () => {
+const Upload = props => {
   const classes = useStyles();
 
   return (
@@ -26,7 +26,10 @@ const Upload = () => {
           <UploadButton />
         </Grid>
         <Grid item>
-          <UploadDropdown />
+          <UploadDropdown
+            options={props.messages}
+            handleChange={props.handleChange}
+          />
         </Grid>
       </Grid>
     </div>
