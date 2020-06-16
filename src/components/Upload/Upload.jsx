@@ -23,7 +23,7 @@ const Upload = props => {
     <div className={classes.root}>
       <Grid container alignItems='center' justify='center'>
         <Grid item>
-          <UploadButton />
+          <UploadButton handleUpload={props.handleUpload} />
         </Grid>
         <Grid item>
           <UploadDropdown

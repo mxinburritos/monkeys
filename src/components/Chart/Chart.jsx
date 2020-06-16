@@ -51,12 +51,12 @@ const generateDateRange = data => {
   let dates = [];
   let newdt = dt1;
   let monthDiff = diff_months(dt1, dt2);
-  if (monthDiff <= 2) {
-    const diffDays = Math.ceil((dt2 - dt1) / (1000 * 60 * 60 * 24));
-    for (let i = 0; i < diffDays; i += diffDays / 10) {
-      newdt = newdt.addDays(diffDays / 10);
-      dates.push(newdt);
-    }
+  console.log(monthDiff);
+
+  const diffDays = Math.ceil((dt2 - dt1) / (1000 * 60 * 60 * 24));
+  for (let i = 0; i < diffDays; i += diffDays / 10) {
+    newdt = newdt.addDays(diffDays / 10);
+    dates.push(newdt);
   }
   return dates;
 };
