@@ -8,7 +8,7 @@ Data found on this app is not an accurate represent of any chat records as the J
 
 ## Getting Started
 
-Visit https://mxinburritos.github.io/monkeys/ to use the application.
+Visit https://mxinburritos.github.io/group-chat-analyzer/ to use the application.
 
 Table lists all users detected in the JSON file and provide information like message count and other metrics in each respective row.
 
