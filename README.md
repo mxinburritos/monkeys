@@ -1,10 +1,8 @@
 # Group Chat Analyzer
 
+![Image demostrating the program](image.png)
+
 This project was built to read JSON data from Facebook Messenger group chats to analyze important information. The main features include swear word counter, number of messages, and charts to visualize data.
-
-# Group Chat Analyzer
-
-[Image demostrating the program](image.png)
 
 ## DISCLAIMER
 
