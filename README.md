@@ -1,6 +1,10 @@
-# Monkeys
+# Group Chat Analyzer
 
 This project was built to read JSON data from Facebook Messenger group chats to analyze important information. The main features include swear word counter, number of messages, and charts to visualize data.
+
+# Group Chat Analyzer
+
+[Image demostrating the program](image.png)
 
 ## DISCLAIMER
 
@@ -8,7 +12,7 @@ Data found on this app is not an accurate represent of any chat records as the J
 
 ## Getting Started
 
-Visit https://mxinburritos.github.io/monkeys/ to use the application. Currently, the uploading feature is not implemented right now. Only the data from our group chat is actually shown.
+Visit https://mxinburritos.github.io/group-chat-analyzer/ to use the application.
 
 Table lists all users detected in the JSON file and provide information like message count and other metrics in each respective row.
 
@@ -32,7 +36,7 @@ This project is licensed under the MIT License - see the
 - [x] Display graphs of data
 - [x] Change table headers
 - [x] Added Frequency Graph
-- [ ] Add way to upload JSON files
+- [x] Add way to upload JSON files
 - [ ] Create JSON processing API
 - [ ] OPTIONAL: Add user login
 - [ ] OPTIONAL: Process other platforms
